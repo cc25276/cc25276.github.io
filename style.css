@@ -28,7 +28,6 @@ body {
     text-align: right;
     font-size: 2.5em; /* 液晶の文字サイズ */
     font-family: 'Orbitron', monospace; /* デジタルフォント */
-    /* または 'Digital-7', monospace; if you use it */
     min-height: 50px;
     display: flex;
     align-items: center;
@@ -61,42 +60,67 @@ body {
     display: flex; /* 中央寄せのためにflexboxを使用 */
     justify-content: center;
     align-items: center;
-    transition: background-color 0.2s; /* ホバー時のアニメーション */
+    transition: background-color 0.2s, box-shadow 0.1s, transform 0.1s; /* ホバー・クリック時のアニメーション */
+
+    /* 立体感を出すためのCSS */
+    border-top: 1px solid rgba(255, 255, 255, 0.5); /* 上部のハイライト */
+    border-left: 1px solid rgba(255, 255, 255, 0.3); /* 左部のハイライト */
+    border-bottom: 3px solid rgba(0, 0, 0, 0.4); /* 下部の影 */
+    border-right: 2px solid rgba(0, 0, 0, 0.2); /* 右部の影 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* ボタン全体の影 */
 }
 
 .button:hover {
     background-color: #999;
+    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.3); /* ホバーで影を少し濃く */
+}
+
+.button:active {
+    /* クリック時にボタンが押されたように見せる */
+    transform: translateY(2px); /* 少し下に移動 */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4); /* 下部の影を薄く */
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2); /* 影を薄く */
 }
 
 /* ONとCEボタンの色 */
 .button-on, .button-ce {
     background-color: #ff6600; /* オレンジ色 */
+    border-top: 1px solid rgba(255, 255, 255, 0.6);
+    border-left: 1px solid rgba(255, 255, 255, 0.4);
+    border-bottom: 3px solid rgba(150, 50, 0, 0.6); /* オレンジ系の影 */
+    border-right: 2px solid rgba(100, 30, 0, 0.4);
 }
 .button-on:hover, .button-ce:hover {
     background-color: #ff8833;
+    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.3);
+}
+.button-on:active, .button-ce:active {
+    transform: translateY(2px);
+    border-bottom: 1px solid rgba(150, 50, 0, 0.6);
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
 }
 
 /* 演算子ボタンの色 */
 .button-operator {
     background-color: #555; /* 暗めのグレー */
+    border-top: 1px solid rgba(255, 255, 255, 0.4);
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 3px solid rgba(0, 0, 0, 0.6);
+    border-right: 2px solid rgba(0, 0, 0, 0.4);
 }
 .button-operator:hover {
     background-color: #777;
+    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.3);
+}
+.button-operator:active {
+    transform: translateY(2px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.6);
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
 }
 
 /* 0ボタンを2マス分にする場合 */
 .button-zero {
     grid-column: span 2; /* 2列分を占める */
-}
-
-/* ドットボタンを通常サイズにする場合 */
-.button-dot {
-    /* 特に指定なし、通常の1マス */
-}
-
-/* その他微調整 */
-.button:active {
-    transform: translateY(1px); /* クリック時に少し沈む効果 */
 }
 
 /* スマートフォンでの表示調整 */
