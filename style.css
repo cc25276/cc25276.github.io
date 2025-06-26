@@ -1,0 +1,90 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* 画面全体の高さ */
+    background-color: #e0e0e0; /* 背景色 */
+    padding: 20px;
+    box-sizing: border-box; /* パディングを含めてサイズを計算 */
+}
+
+.calculator-container {
+    background-color: #333; /* 電卓本体の背景色 */
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.3), -8px -8px 15px rgba(255, 255, 255, 0.1); /* 立体感 */
+    display: flex;
+    flex-direction: column;
+    max-width: 400px; /* 電卓の最大幅 */
+    width: 100%; /* レスポンシブ対応 */
+}
+
+.display {
+    background-color: #c9d7c3; /* 液晶ディスプレイの色 */
+    height: 80px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end; /* 右寄せ */
+    padding: 10px;
+    font-size: 1.5em; /* 文字サイズ */
+    color: #222; /* 文字色 */
+    overflow: hidden; /* はみ出しを隠す */
+    text-align: right; /* テキストを右寄せ */
+}
+
+.display .line1 {
+    font-size: 0.8em; /* 上の行は少し小さめ */
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.display .line2 {
+    font-size: 1.3em; /* 下の行は大きめ */
+    font-weight: bold;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4列のグリッド */
+    gap: 15px; /* ボタン間の間隔 */
+}
+
+.calc-btn {
+    background-color: #555; /* ボタンの背景色 */
+    color: white; /* ボタンの文字色 */
+    border: none;
+    border-radius: 10px;
+    padding: 20px 0;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease; /* ホバーとクリックのアニメーション */
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3), -3px -3px 6px rgba(255, 255, 255, 0.1); /* ボタンの立体感 */
+}
+
+.calc-btn:hover {
+    background-color: #666;
+    transform: translateY(-2px); /* 少し浮き上がる */
+}
+
+.calc-btn:active {
+    background-color: #444;
+    transform: translateY(1px); /* 少し沈む */
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3) inset, -1px -1px 3px rgba(255, 255, 255, 0.1) inset; /* 押された感じ */
+}
+
+.calc-btn.wide {
+    grid-column: span 2; /* 2列分の幅を使うボタン */
+}
+
+.calc-btn.special-btn {
+    background-color: #d9534f; /* 特殊なボタンの色（例: 赤） */
+}
+
+.calc-btn.special-btn:hover {
+    background-color: #c9302c;
+}
