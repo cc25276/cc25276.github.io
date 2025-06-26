@@ -3,32 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>簿記会計研究会 - メインメニュー</title>
+    <title>デジタル計算機風サイト</title>
     <link rel="stylesheet" href="style.css">
-</head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+    </head>
 <body>
     <div class="calculator-container">
         <div class="display">
-            <div class="line1">簿記会計研究会</div>
-            <div class="line2">メニュー</div>
+            <p id="organization-name">団体名やメッセージ</p>
         </div>
-        <div class="buttons">
-            <button class="calc-btn" onclick="goToPage('materials.html')">資料配布</button>
-            <button class="calc-btn" onclick="goToPage('schedule.html')">活動予定</button>
-            <button class="calc-btn" onclick="goToPage('members.html')">会員情報</button>
-            <button class="calc-btn wide" onclick="goToPage('contact.html')">お問い合わせ</button>
-            <button class="calc-btn" onclick="goToPage('about.html')">研究会概要</button>
-            <button class="calc-btn" onclick="goToPage('link.html')">関連リンク</button>
-            <button class="calc-btn" onclick="goToPage('notes.html')">連絡事項</button>
-            <button class="calc-btn wide" onclick="goToPage('quiz.html')">ミニクイズ</button>
-            <button class="calc-btn" onclick="goToPage('gallery.html')">活動写真</button>
-            <button class="calc-btn" onclick="goToPage('faq.html')">よくある質問</button>
-            <button class="calc-btn" onclick="goToPage('logout.html')">ログアウト</button>
-            <button class="calc-btn wide special-btn" onclick="goToPage('admin.html')">管理者ページ</button>
+        <div class="buttons-grid">
+            <a href="on.html" class="button button-on">ON</a>
+            <a href="ce.html" class="button button-ce">CE</a>
+            <a href="percent.html" class="button button-operator">%</a>
+            <a href="sqrt.html" class="button button-operator">√</a>
+
+            <a href="seven.html" class="button">7</a>
+            <a href="eight.html" class="button">8</a>
+            <a href="nine.html" class="button">9</a>
+            <a href="divide.html" class="button button-operator">÷</a>
+
+            <a href="four.html" class="button">4</a>
+            <a href="five.html" class="button">5</a>
+            <a href="six.html" class="button">6</a>
+            <a href="multiply.html" class="button button-operator">×</a>
+
+            <a href="one.html" class="button">1</a>
+            <a href="two.html" class="button">2</a>
+            <a href="three.html" class="button">3</a>
+            <a href="minus.html" class="button button-operator">-</a>
+
+            <a href="zero.html" class="button button-zero">0</a>
+            <a href="dot.html" class="button button-dot">.</a>
+            <a href="equals.html" class="button button-operator">=</a>
+            <a href="plus.html" class="button button-operator">+</a>
         </div>
     </div>
 
-}
-    <script src="script.js"></script>
+    <script>
+        // JavaScriptで動的に文字を変更する場合（オプション）
+        // const orgName = document.getElementById('organization-name');
+        // orgName.textContent = "あなたの団体名"; // ここに表示したいテキストを入れる
+    </script>
 </body>
 </html>
