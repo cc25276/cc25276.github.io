@@ -1,90 +1,114 @@
 body {
-    margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh; /* 画面全体の高さ */
-    background-color: #e0e0e0; /* 背景色 */
-    padding: 20px;
-    box-sizing: border-box; /* パディングを含めてサイズを計算 */
+    min-height: 100vh;
+    background-color: #f0f0f0;
+    margin: 0;
+    font-family: sans-serif;
 }
 
 .calculator-container {
-    background-color: #333; /* 電卓本体の背景色 */
+    background-color: #c0c0c0; /* 電卓本体の色 */
+    border: 2px solid #808080;
     border-radius: 15px;
     padding: 20px;
-    box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.3), -8px -8px 15px rgba(255, 255, 255, 0.1); /* 立体感 */
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
+    width: 300px; /* 電卓の幅 */
     display: flex;
     flex-direction: column;
-    max-width: 400px; /* 電卓の最大幅 */
-    width: 100%; /* レスポンシブ対応 */
+    gap: 15px;
 }
 
 .display {
-    background-color: #c9d7c3; /* 液晶ディスプレイの色 */
-    height: 80px;
+    background-color: #333; /* 液晶の背景色 */
+    color: #00ff00; /* デジタル表示の色（緑） */
+    padding: 15px;
     border-radius: 8px;
-    margin-bottom: 20px;
+    text-align: right;
+    font-size: 2.5em; /* 液晶の文字サイズ */
+    font-family: 'Orbitron', monospace; /* デジタルフォント */
+    /* または 'Digital-7', monospace; if you use it */
+    min-height: 50px;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-end; /* 右寄せ */
-    padding: 10px;
-    font-size: 1.5em; /* 文字サイズ */
-    color: #222; /* 文字色 */
-    overflow: hidden; /* はみ出しを隠す */
-    text-align: right; /* テキストを右寄せ */
+    align-items: center;
+    justify-content: flex-end; /* 右寄せ */
+    overflow: hidden; /* 長い文字がはみ出さないように */
 }
 
-.display .line1 {
-    font-size: 0.8em; /* 上の行は少し小さめ */
-    color: #555;
-    margin-bottom: 5px;
+#organization-name {
+    margin: 0;
+    padding: 0;
+    white-space: nowrap; /* テキストが改行されないように */
 }
 
-.display .line2 {
-    font-size: 1.3em; /* 下の行は大きめ */
-    font-weight: bold;
-}
-
-.buttons {
+.buttons-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4列のグリッド */
-    gap: 15px; /* ボタン間の間隔 */
+    grid-template-columns: repeat(4, 1fr); /* 4列 */
+    gap: 10px;
 }
 
-.calc-btn {
-    background-color: #555; /* ボタンの背景色 */
-    color: white; /* ボタンの文字色 */
-    border: none;
-    border-radius: 10px;
-    padding: 20px 0;
-    font-size: 1.2em;
+.button {
+    background-color: #777; /* 通常ボタンの色 */
+    color: white;
+    padding: 15px 0;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.2s ease, transform 0.1s ease; /* ホバーとクリックのアニメーション */
-    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3), -3px -3px 6px rgba(255, 255, 255, 0.1); /* ボタンの立体感 */
+    text-decoration: none; /* リンクの下線を除去 */
+    display: flex; /* 中央寄せのためにflexboxを使用 */
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s; /* ホバー時のアニメーション */
 }
 
-.calc-btn:hover {
-    background-color: #666;
-    transform: translateY(-2px); /* 少し浮き上がる */
+.button:hover {
+    background-color: #999;
 }
 
-.calc-btn:active {
-    background-color: #444;
-    transform: translateY(1px); /* 少し沈む */
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3) inset, -1px -1px 3px rgba(255, 255, 255, 0.1) inset; /* 押された感じ */
+/* ONとCEボタンの色 */
+.button-on, .button-ce {
+    background-color: #ff6600; /* オレンジ色 */
+}
+.button-on:hover, .button-ce:hover {
+    background-color: #ff8833;
 }
 
-.calc-btn.wide {
-    grid-column: span 2; /* 2列分の幅を使うボタン */
+/* 演算子ボタンの色 */
+.button-operator {
+    background-color: #555; /* 暗めのグレー */
+}
+.button-operator:hover {
+    background-color: #777;
 }
 
-.calc-btn.special-btn {
-    background-color: #d9534f; /* 特殊なボタンの色（例: 赤） */
+/* 0ボタンを2マス分にする場合 */
+.button-zero {
+    grid-column: span 2; /* 2列分を占める */
 }
 
-.calc-btn.special-btn:hover {
-    background-color: #c9302c;
+/* ドットボタンを通常サイズにする場合 */
+.button-dot {
+    /* 特に指定なし、通常の1マス */
+}
+
+/* その他微調整 */
+.button:active {
+    transform: translateY(1px); /* クリック時に少し沈む効果 */
+}
+
+/* スマートフォンでの表示調整 */
+@media (max-width: 600px) {
+    .calculator-container {
+        width: 90%; /* 画面幅に合わせて調整 */
+    }
+    .display {
+        font-size: 2em;
+    }
+    .button {
+        font-size: 1.3em;
+        padding: 12px 0;
+    }
 }
