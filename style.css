@@ -1,9 +1,3 @@
-承知いたしました。
-これまで修正してきた内容をすべて統合した、最新の `style.css` の完全なコードを提供します。
-
-このコードを `style.css` という名前で保存し、`index.html` および `picture` フォルダ（その中に `study3.png` がある）と同じ階層に置いてください。
-
-```css
 /* 全体のリセットと基本設定 */
 body {
     margin: 0;
@@ -13,7 +7,7 @@ body {
     background-color: #f4f4f4; /* 背景画像が表示されない場合のフォールバック */
     
     /* 背景画像の設定 */
-    background-image: url('picture/ノート背景.png'); /* pictureフォルダ内のstudy3.pngを指定 */
+    background-image: url('picture/study3.png'); /* pictureフォルダ内のstudy3.pngを指定 */
     background-size: cover; /* 画面全体に画像を拡大・縮小して表示 */
     background-position: center; /* 画像を中央に配置 */
     background-attachment: fixed; /* スクロールしても背景画像を固定 */
@@ -84,37 +78,87 @@ section h2, section h3 {
     margin-bottom: 20px;
 }
 
-/* ヒーローセクション（ファーストビュー） */
-#hero {
-    text-align: center;
-    padding: 80px 0; /* PCでのヒーローセクションパディング */
-    background-color: rgba(240, 248, 255, 0.8); /* ヒーローセクションの背景 */
+/* ヒーローセクションは削除のため、#heroに関するスタイルは不要 */
+/* .buttonに関するスタイルも今回は不要（HTMLから削除したため） */
+
+
+/* ファイルグリッドレイアウト */
+.file-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* 2列表示、スマホでは1列に */
+    gap: 25px; /* ファイルアイテム間の間隔 */
+    padding: 20px 0;
+}
+
+.file-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
     border-radius: 8px;
-    margin-bottom: 40px; /* PCでのマージン */
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* ファイル名が下に揃うように */
 }
 
-#hero h2 {
-    font-size: 3rem; /* PCでのフォントサイズ */
-    color: #0056b3;
+.file-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
-#hero p {
-    font-size: 1.2rem; /* PCでのフォントサイズ */
-    margin-bottom: 30px;
+.pdf-preview-container {
+    position: relative;
+    width: 100%;
+    padding-top: 75%; /* 4:3のアスペクト比 (高さ / 幅 * 100) または 3:2 の 66.6% など */
+    overflow: hidden;
+    background-color: #e9e9e9; /* プレビューがない場合の背景 */
+    cursor: pointer; /* クリック可能であることを示す */
 }
 
-.button {
-    display: inline-block;
-    background-color: #007bff;
+.pdf-thumbnail {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* 画像全体が表示されるように */
+    display: block;
+}
+
+.pdf-preview-container .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* 半透明の黒 */
     color: #fff;
-    padding: 12px 25px;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
-.button:hover {
-    background-color: #0056b3;
+.pdf-preview-container:hover .overlay {
+    opacity: 1; /* ホバーでオーバーレイを表示 */
+}
+
+.file-name {
+    padding: 15px;
+    font-weight: bold;
+    color: #007bff;
+    text-decoration: none;
+    cursor: pointer; /* クリック可能であることを示す */
+    margin: 0; /* 余分なマージンを削除 */
+    word-wrap: break-word; /* 長いファイル名で改行 */
+}
+
+.file-name:hover {
+    text-decoration: underline;
 }
 
 /* フッター */
@@ -124,6 +168,67 @@ footer {
     text-align: center;
     padding: 1rem 0;
     margin-top: 20px;
+}
+
+
+/* ダウンロード確認ポップアップ */
+.popup-overlay {
+    display: none; /* デフォルトで非表示 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* 半透明の黒背景 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.popup-content {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    position: relative;
+}
+
+.popup-content p {
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+}
+
+#download-file-name {
+    font-weight: bold;
+    color: #007bff;
+}
+
+.popup-buttons button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin: 0 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.2s ease;
+}
+
+.popup-buttons button:hover {
+    background-color: #0056b3;
+}
+
+#cancel-download {
+    background-color: #6c757d; /* グレー系 */
+}
+
+#cancel-download:hover {
+    background-color: #5a6268;
 }
 
 /* スマートフォン対応（@media クエリ） */
@@ -146,24 +251,22 @@ footer {
         margin: 10px auto; /* 既存の15pxからさらに減らす */
     }
 
-    /* ヒーローセクションをよりコンパクトにする */
-    #hero {
-        padding: 30px 15px; /* 上下左右パディングを減らす */
-        margin-bottom: 20px; /* 下マージンを減らす */
-    }
-
-    #hero h2 {
-        font-size: 1.8rem; /* フォントサイズも少し小さく */
-    }
-
-    #hero p {
-        font-size: 0.9rem; /* フォントサイズも少し小さく */
-        margin-bottom: 20px; /* パラグラフ下マージンを減らす */
-    }
+    /* ヒーローセクションは削除されたため、ここも不要 */
+    /* #heroに関するスタイルは不要 */
 
     /* 各セクションのパディングも少し減らす */
     section {
         padding: 25px 0;
     }
+
+    /* ファイルグリッドをスマホでは1列に */
+    .file-grid {
+        grid-template-columns: 1fr; /* スマホでは1列 */
+        gap: 20px;
+    }
+
+    .file-item {
+        max-width: 350px; /* スマホでアイテムの最大幅を設定 */
+        margin: 0 auto; /* 中央寄せ */
+    }
 }
-```
