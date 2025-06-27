@@ -183,6 +183,6 @@ footer {
         padding: 10px;
     }
 }
-p {
+.p {
     text-align: center; /* これを追加 */
 }
