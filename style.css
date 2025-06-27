@@ -78,14 +78,10 @@ section h2, section h3 {
     margin-bottom: 20px;
 }
 
-/* ヒーローセクションは削除のため、#heroに関するスタイルは不要 */
-/* .buttonに関するスタイルも今回は不要（HTMLから削除したため） */
-
-
 /* ファイルグリッドレイアウト */
 .file-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* 2列表示、スマホでは1列に */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* 2列表示 */
     gap: 25px; /* ファイルアイテム間の間隔 */
     padding: 20px 0;
 }
@@ -111,7 +107,7 @@ section h2, section h3 {
 .pdf-preview-container {
     position: relative;
     width: 100%;
-    padding-top: 75%; /* 4:3のアスペクト比 (高さ / 幅 * 100) または 3:2 の 66.6% など */
+    padding-top: 75%; /* 4:3のアスペクト比 (高さ / 幅 * 100) */
     overflow: hidden;
     background-color: #e9e9e9; /* プレビューがない場合の背景 */
     cursor: pointer; /* クリック可能であることを示す */
@@ -151,14 +147,15 @@ section h2, section h3 {
     padding: 15px;
     font-weight: bold;
     color: #007bff;
-    text-decoration: none;
+    text-decoration: none; /* <a>タグのデフォルトの下線を消す */
     cursor: pointer; /* クリック可能であることを示す */
     margin: 0; /* 余分なマージンを削除 */
     word-wrap: break-word; /* 長いファイル名で改行 */
+    display: block; /* <a>タグをブロック要素にして、パディングなどを適用しやすくする */
 }
 
 .file-name:hover {
-    text-decoration: underline;
+    text-decoration: underline; /* ホバーで下線を表示 */
 }
 
 /* フッター */
@@ -170,66 +167,6 @@ footer {
     margin-top: 20px;
 }
 
-
-/* ダウンロード確認ポップアップ */
-.popup-overlay {
-    display: none; /* デフォルトで非表示 */
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.6); /* 半透明の黒背景 */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 2000;
-}
-
-.popup-content {
-    background-color: #fff;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    text-align: center;
-    max-width: 400px;
-    width: 90%;
-    position: relative;
-}
-
-.popup-content p {
-    font-size: 1.2rem;
-    margin-bottom: 25px;
-}
-
-#download-file-name {
-    font-weight: bold;
-    color: #007bff;
-}
-
-.popup-buttons button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    margin: 0 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background-color 0.2s ease;
-}
-
-.popup-buttons button:hover {
-    background-color: #0056b3;
-}
-
-#cancel-download {
-    background-color: #6c757d; /* グレー系 */
-}
-
-#cancel-download:hover {
-    background-color: #5a6268;
-}
 
 /* スマートフォン対応（@media クエリ） */
 @media (max-width: 768px) {
@@ -247,26 +184,24 @@ footer {
 
     /* main要素のパディングとマージンを減らす */
     main {
-        padding: 10px; /* 既存の15pxからさらに減らす */
-        margin: 10px auto; /* 既存の15pxからさらに減らす */
+        padding: 10px;
+        margin: 10px auto;
     }
-
-    /* ヒーローセクションは削除されたため、ここも不要 */
-    /* #heroに関するスタイルは不要 */
 
     /* 各セクションのパディングも少し減らす */
     section {
         padding: 25px 0;
     }
 
-    /* ファイルグリッドをスマホでは1列に */
+    /* ファイルグリッドをスマホでも2列に */
     .file-grid {
-        grid-template-columns: 1fr; /* スマホでは1列 */
-        gap: 20px;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* スマホでも2列にするための調整 */
+        gap: 15px; /* スマホ向けに間隔を調整 */
     }
 
+    /* .file-item のmax-widthとmarginは不要になることが多いので削除推奨 */
     .file-item {
-        max-width: 350px; /* スマホでアイテムの最大幅を設定 */
-        margin: 0 auto; /* 中央寄せ */
+        /* max-width: 350px; /* ここは削除またはコメントアウト */
+        /* margin: 0 auto;   /* ここは削除またはコメントアウト */
     }
 }
