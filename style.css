@@ -4,8 +4,7 @@ body {
     font-family: 'Arial', sans-serif;
     line-height: 1.6;
     color: #333;
-    background-color: #f4f4f4; 
-    
+    background-color: #f4f4f4;    
     background-image: url('picture/study3.png');
     background-size: cover;
     background-position: center;
@@ -71,11 +70,24 @@ section:last-child {
     border-bottom: none;
 }
 
-section h2, section h3 {
+/* ★修正点: h2とh3のスタイルを調整 */
+section h2 { /* h2はセクション全体のタイトルとして中央揃え */
     text-align: center;
     color: #007bff;
     margin-bottom: 20px;
 }
+
+/* 新しいテーマ見出しのスタイル */
+.topic-title {
+    text-align: center; /* 中央揃え */
+    color: #007bff;
+    font-size: 1.5rem; /* h3として適切なサイズ */
+    margin-top: 30px; /* 上部にスペース */
+    margin-bottom: 15px; /* 下部にスペース */
+    border-bottom: 1px dashed #ccc; /* 軽く区切り線を追加（任意） */
+    padding-bottom: 5px; /* 区切り線との間隔 */
+}
+
 
 /* ファイルグリッドレイアウト */
 .file-grid {
@@ -103,11 +115,6 @@ section h2, section h3 {
     transform: translateY(-5px);
     box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
-
-/* ★修正点: pdf-preview-containerと関連スタイルを削除 */
-/* .pdf-preview-container { ... } */
-/* .pdf-thumbnail { ... } */
-/* .pdf-preview-container .overlay { ... } */
 
 .file-name {
     padding: 15px;
