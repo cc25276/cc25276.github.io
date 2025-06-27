@@ -13,7 +13,7 @@ body {
     background-color: #f4f4f4; /* 背景画像が表示されない場合のフォールバック */
     
     /* 背景画像の設定 */
-    background-image: url('picture/study3.png'); /* pictureフォルダ内のstudy3.pngを指定 */
+    background-image: url('picture/ノート背景.png'); /* pictureフォルダ内のstudy3.pngを指定 */
     background-size: cover; /* 画面全体に画像を拡大・縮小して表示 */
     background-position: center; /* 画像を中央に配置 */
     background-attachment: fixed; /* スクロールしても背景画像を固定 */
