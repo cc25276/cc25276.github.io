@@ -3,7 +3,7 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #f0f2f5; /* 背景をさらに明るいグレーに */
+    background-color: #f0f2f5;
     margin: 0;
     font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
     color: #333;
@@ -11,52 +11,52 @@ body {
 
 .calculator-container {
     background-color: #e0e0e0; /* 本体は明るめのグレー */
-    border-radius: 12px; /* 少し丸みを抑える */
-    padding: 15px; /* 全体のパディングを調整 */
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); /* 柔らかく奥行きのある影 */
-    width: 300px; /* 画像の比率に合わせて幅を調整 */
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    width: 300px; /* 幅を調整 */
+    height: 480px; /* 高さを固定し、サイドバーの位置を調整しやすくする */
     display: flex;
     flex-direction: column;
-    gap: 12px; /* 要素間のスペース */
+    gap: 12px;
     position: relative;
-    overflow: hidden; /* 角丸に合わせた影の調整 */
-    border: 1px solid #c0c0c0; /* 本体にわずかなボーダー */
+    overflow: hidden;
+    border: 1px solid #c0c0c0;
 }
 
 /* サイドのミントグリーン（ターコイズブルー）のアクセント */
+/* 液晶の少し下から始まるように調整 */
 .calculator-container::before,
 .calculator-container::after {
     content: '';
     position: absolute;
-    top: 0;
-    width: 15px; /* サイドバーの幅 */
+    top: 130px; /* 液晶下部から始まるように調整 (約130pxは液晶と上部パネルの合計高さ) */
+    width: 15px;
     bottom: 0;
     background-color: #55c4b8; /* 参考画像のミントグリーンに近い色 */
     z-index: 0;
 }
 .calculator-container::before {
     left: 0;
-    border-top-left-radius: 12px;
-    border-bottom-left-radius: 12px;
+    border-bottom-left-radius: 12px; /* 下部のみ角丸 */
 }
 .calculator-container::after {
     right: 0;
-    border-top-right-radius: 12px;
-    border-bottom-right-radius: 12px;
+    border-bottom-right-radius: 12px; /* 下部のみ角丸 */
 }
 
 /* 液晶部分のラッパー（上部のCASIOロゴなども含む想定） */
 .top-panel {
-    background-color: #d0d0d0; /* 液晶上のパネル色 */
+    background-color: #d0d0d0;
     border-radius: 8px;
-    padding: 10px 15px 5px; /* 上下のパディングを調整 */
-    margin-bottom: 5px; /* 液晶との間隔 */
+    padding: 10px 15px 5px;
+    margin-bottom: 5px;
     box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
-    text-align: center; /* CASIOロゴなどがあれば中央に */
+    text-align: center;
     font-size: 0.8em;
     color: #666;
     position: relative;
-    z-index: 1; /* ボタンより手前に */
+    z-index: 1;
 }
 
 .top-panel span {
@@ -68,17 +68,17 @@ body {
     background-color: #71807d; /* 液晶の背景色を暗めの緑がかったグレーに */
     color: #c9f500; /* デジタル表示の色を明るい黄緑に */
     padding: 15px;
-    border-radius: 8px; /* 液晶の角丸 */
+    border-radius: 8px;
     text-align: right;
-    font-size: 2.5em; /* 液晶の文字サイズ */
-    font-family: 'Orbitron', monospace; /* デジタルフォント */
-    min-height: 55px; /* 高さ調整 */
+    font-size: 2.5em;
+    font-family: 'Orbitron', monospace;
+    min-height: 55px;
     display: flex;
     align-items: center;
     justify-content: flex-end;
     overflow: hidden;
-    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.4), 0 0 10px rgba(201, 245, 0, 0.2); /* 内側の影と、デジタル表示の光る効果 */
-    letter-spacing: 1px; /* 文字間隔を調整 */
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.4), 0 0 10px rgba(201, 245, 0, 0.2);
+    letter-spacing: 1px;
     position: relative;
     z-index: 1;
 }
@@ -87,128 +87,119 @@ body {
     margin: 0;
     padding: 0;
     white-space: nowrap;
-    text-shadow: 0 0 6px rgba(201, 245, 0, 0.7); /* デジタル文字に光るような影 */
+    text-shadow: 0 0 6px rgba(201, 245, 0, 0.7);
 }
 
 .buttons-grid {
+    /* 5列で設定し、各ボタンの配置を細かく制御 */
     display: grid;
-    /* 参考画像に合わせて列数を調整。上部ボタンも含めるともっと複雑になるが、
-       主要な数字・演算子キーに合わせて4列で調整 */
-    grid-template-columns: repeat(4, 1fr);
-    gap: 8px; /* ボタン間のスペースを狭くする */
-    z-index: 1; /* ボタンが背景のグラデーションより手前に来るように */
+    grid-template-columns: repeat(5, 1fr); /* 5列に */
+    grid-template-rows: repeat(6, 1fr); /* キーの行数に合わせて調整（MC行+数字3行+0行+AC/C行+演算子行） */
+    gap: 8px; /* ボタン間のスペース */
+    z-index: 1;
+    height: 100%; /* 親要素の高さに合わせる */
 }
 
 .button {
-    background-color: #ffffff; /* 通常ボタンの色は白 */
-    color: #333; /* ボタンの文字色 */
-    padding: 12px 0; /* パディングを調整 */
-    border-radius: 6px; /* ボタンの角をややシャープに */
+    background-color: #ffffff;
+    color: #333;
+    padding: 12px 0;
+    border-radius: 6px;
     text-align: center;
-    font-size: 1.4em; /* ボタンの文字サイズ */
-    font-weight: 500; /* フォントの太さ */
+    font-size: 1.4em;
+    font-weight: 500;
     cursor: pointer;
     text-decoration: none;
     display: flex;
     justify-content: center;
     align-items: center;
     transition: background-color 0.2s, box-shadow 0.1s, transform 0.1s;
-    
-    /* 立体感を出すためのCSS */
-    border: 1px solid rgba(0, 0, 0, 0.1); /* 細いボーダーで輪郭を出す */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 柔らかい影 */
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .button:hover {
-    background-color: #f0f0f0; /* ホバーで少し暗く */
+    background-color: #f0f0f0;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
 }
 
 .button:active {
-    transform: translateY(1px); /* 少しだけ下に移動 */
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08); /* 影を控えめに */
-    background-color: #e8e8e8; /* 押された感を出す */
+    transform: translateY(1px);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+    background-color: #e8e8e8;
 }
 
-/* 特殊なボタンの色分け (参考画像より) */
-
-/* AC, C ボタン (赤紫系) */
-.button-ac, .button-c {
-    background-color: #db7093; /* 例: パレトパープルに近い色 */
-    color: white;
-    font-size: 1.2em; /* AC, Cは文字が小さめ */
-    font-weight: bold;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
-}
-.button-ac:hover, .button-c:hover {
-    background-color: #c05a81;
-}
-.button-ac:active, .button-c:active {
-    background-color: #a8476f;
-}
-
-/* MC, MR, M-, M+ ボタン (青紫系) */
+/* メモリーボタン (MC, MR, M-, M+) - 一番上の行 */
 .button-mem {
-    background-color: #8a2be2; /* 例: ブルーバイオレットに近い色 */
+    background-color: #8a2be2; /* 青紫系 */
     color: white;
     font-size: 1.2em;
     font-weight: bold;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 }
-.button-mem:hover {
-    background-color: #721bb8;
+/* AC, C ボタン (赤紫系) - 左サイド */
+.button-ac, .button-c {
+    background-color: #db7093; /* 赤紫系 */
+    color: white;
+    font-size: 1.2em;
+    font-weight: bold;
 }
-.button-mem:active {
-    background-color: #5c1496;
-}
-
-/* 演算子ボタン (濃いグレー/黒系) - 画像では一部白、一部濃い色ですが、今回は統一 */
+/* 演算子ボタン (濃いグレー/黒系) - 右サイド */
 .button-operator {
     background-color: #555; /* 暗めのグレー */
     color: white;
     font-weight: bold;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
-}
-.button-operator:hover {
-    background-color: #444;
-}
-.button-operator:active {
-    background-color: #333;
 }
 
-/* GT, √, %, H/M/S など、特殊な機能キー (薄いグレー) */
-.button-func {
-    background-color: #b0b0b0; /* 薄めのグレー */
-    color: #333; /* 文字色は黒 */
-    font-size: 1.2em;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-.button-func:hover {
-    background-color: #a0a0a0;
-}
-.button-func:active {
-    background-color: #909090;
+/* 各ボタンのグリッド配置を細かく指定 */
+/* MC, MR, M-, M+ (一番上の行) */
+.mc-key { grid-area: 1 / 1 / 2 / 2; } /* row-start / column-start / row-end / column-end */
+.mr-key { grid-area: 1 / 2 / 2 / 3; }
+.m-minus-key { grid-area: 1 / 3 / 2 / 4; }
+.m-plus-key { grid-area: 1 / 4 / 2 / 5; }
+
+/* 7, 8, 9 */
+.seven-key { grid-area: 2 / 2 / 3 / 3; }
+.eight-key { grid-area: 2 / 3 / 3 / 4; }
+.nine-key { grid-area: 2 / 4 / 3 / 5; }
+
+/* 4, 5, 6 */
+.four-key { grid-area: 3 / 2 / 4 / 3; }
+.five-key { grid-area: 3 / 3 / 4 / 4; }
+.six-key { grid-area: 3 / 4 / 4 / 5; }
+
+/* 1, 2, 3 */
+.one-key { grid-area: 4 / 2 / 5 / 3; }
+.two-key { grid-area: 4 / 3 / 5 / 4; }
+.three-key { grid-area: 4 / 4 / 5 / 5; }
+
+/* 0 */
+.zero-key { grid-area: 5 / 2 / 6 / 4; } /* 0は2マス分 */
+
+/* AC, C (左サイド) */
+.ac-key { grid-area: 2 / 1 / 3 / 2; }
+.c-key { grid-area: 3 / 1 / 4 / 2; }
+
+
+/* 演算子 (右サイド) */
+.divide-key { grid-area: 2 / 5 / 3 / 6; }
+.multiply-key { grid-area: 3 / 5 / 4 / 6; }
+.minus-key { grid-area: 4 / 5 / 5 / 6; }
+.plus-key { grid-area: 5 / 5 / 6 / 6; }
+.equals-key { grid-area: 6 / 5 / 7 / 6; } /* =は一番下の行の右端 */
+
+/* AC, C, 演算子キーも高さを揃える */
+.button-ac, .button-c, .button-operator, .button-mem {
+    height: 100%; /* グリッドセル全体に広げる */
 }
 
-/* 「00」ボタンのスタイル */
-.button-double-zero {
-    grid-column: span 1; /* 通常の1マス */
-}
-
-/* 0ボタンを2マス分にする場合 (元の画像では0は1マスで00が独立) */
-/* もし0を2マスにしたい場合は、HTML側で0に .button-zero を付与し、
-   以下を有効にしてください。今回は画像に合わせて無効化。
-.button-zero {
-    grid-column: span 2;
-}
-*/
 
 /* スマートフォンでの表示調整 */
 @media (max-width: 600px) {
     .calculator-container {
-        width: 90%; /* 画面幅に合わせて調整 */
+        width: 95%;
         padding: 10px;
-        gap: 8px;
+        gap: 6px;
+        height: auto; /* スマホでは高さ固定を解除し、コンテンツに合わせる */
     }
     .display {
         font-size: 2em;
@@ -218,9 +209,12 @@ body {
     .button {
         font-size: 1.2em;
         padding: 10px 0;
+        border-radius: 5px;
     }
     .calculator-container::before,
     .calculator-container::after {
-        width: 10px; /* サイドバーの幅を狭く */
+        width: 10px;
+        top: 100px; /* スマホ表示に合わせて開始位置を調整 */
     }
+    /* スマホ表示ではグリッドエリアの調整が必要になる場合がある */
 }
