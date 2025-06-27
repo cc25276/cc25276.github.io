@@ -3,41 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>簿研ナビ</title>
+    <title>私のホームページ</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <h1>資料管理サイト</h1>
+        <h1>ようこそ私のホームページへ！</h1>
         <nav>
             <ul>
-                <li><a href="#about">このサイトについて</a></li>
-                <li><a href="#services">サービス</a></li>
+                <li><a href="#lectures">講義資料</a></li>
+                <li><a href="#financials">財務諸表</a></li>
                 <li><a href="#contact">お問い合わせ</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
-        <section id="hero">
-            <h2>新しい学びの旅へ</h2>
-            <p>ここでは、様々なトピックについて学ぶことができます。</p>
-            <a href="#" class="button">もっと詳しく</a>
-        </section>
-
         <section id="about">
             <h3>このサイトについて</h3>
             <p>このホームページは、皆さんの知的好奇心を刺激し、新しい知識を習得するための情報を提供することを目的としています。</p>
             <p>初心者の方から経験者の方まで、幅広いレベルに対応したコンテンツを随時更新していきます。</p>
         </section>
 
-        <section id="services">
-            <h3>提供サービス</h3>
-            <ul>
-                <li>ブログ記事の閲覧</li>
-                <li>オンライン学習リソースの紹介</li>
-                <li>Q&Aフォーラム（準備中）</li>
-            </ul>
+        <section id="lectures">
+            <h3>講義資料</h3>
+            <p>こちらでは、共有したい講義資料のPDFファイルを掲載しています。</p>
+            <div class="file-grid">
+                <div class="file-item">
+                    <div class="pdf-preview-container">
+                        <img src="picture/lecture1_thumb.png" alt="講義資料1 プレビュー" class="pdf-thumbnail">
+                        <div class="overlay">PDFプレビュー</div>
+                    </div>
+                    <p class="file-name" data-file-path="files/lecture_material_01.pdf">講義資料_20250101.pdf</p>
+                </div>
+
+                <div class="file-item">
+                    <div class="pdf-preview-container">
+                        <img src="picture/lecture2_thumb.png" alt="講義資料2 プレビュー" class="pdf-thumbnail">
+                        <div class="overlay">PDFプレビュー</div>
+                    </div>
+                    <p class="file-name" data-file-path="files/lecture_material_02.pdf">講義資料_20250115.pdf</p>
+                </div>
+
+                <div class="file-item">
+                    <div class="pdf-preview-container">
+                        <img src="picture/lecture3_thumb.png" alt="講義資料3 プレビュー" class="pdf-thumbnail">
+                        <div class="overlay">PDFプレビュー</div>
+                    </div>
+                    <p class="file-name" data-file-path="files/lecture_material_03.pdf">講義資料_20250201.pdf</p>
+                </div>
+                <div class="file-item">
+                    <div class="pdf-preview-container">
+                        <img src="picture/lecture4_thumb.png" alt="講義資料4 プレビュー" class="pdf-thumbnail">
+                        <div class="overlay">PDFプレビュー</div>
+                    </div>
+                    <p class="file-name" data-file-path="files/lecture_material_04.pdf">講義資料_20250215.pdf</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="financials">
+            <h3>財務諸表</h3>
+            <p>こちらでは、共有したい財務諸表のPDFファイルを掲載しています。</p>
+            <div class="file-grid">
+                <div class="file-item">
+                    <div class="pdf-preview-container">
+                        <img src="picture/financial1_thumb.png" alt="財務諸表1 プレビュー" class="pdf-thumbnail">
+                        <div class="overlay">PDFプレビュー</div>
+                    </div>
+                    <p class="file-name" data-file-path="files/financial_statement_2023.pdf">財務諸表_2023年度.pdf</p>
+                </div>
+
+                <div class="file-item">
+                    <div class="pdf-preview-container">
+                        <img src="picture/financial2_thumb.png" alt="財務諸表2 プレビュー" class="pdf-thumbnail">
+                        <div class="overlay">PDFプレビュー</div>
+                    </div>
+                    <p class="file-name" data-file-path="files/financial_statement_2024.pdf">財務諸表_2024年度.pdf</p>
+                </div>
+            </div>
         </section>
 
         <section id="contact">
@@ -50,5 +94,17 @@
     <footer>
         <p>&copy; 2025 私のホームページ. All rights reserved.</p>
     </footer>
+
+    <div id="download-popup" class="popup-overlay">
+        <div class="popup-content">
+            <p><span id="download-file-name"></span> をダウンロードしますか？</p>
+            <div class="popup-buttons">
+                <button id="confirm-download">ダウンロード</button>
+                <button id="cancel-download">キャンセル</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
