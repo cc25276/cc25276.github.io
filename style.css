@@ -1,315 +1,153 @@
- body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #f0f2f5;
+/* 全体のリセットと基本設定 */
+body {
     margin: 0;
-    font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
     color: #333;
-    overflow-x: hidden; /* 横スクロールバーが出ないように */
-}
-
-.calculator-container {
-    background-color: #e0e0e0; /* 本体は明るめのグレー */
-    border-radius: 12px;
-    padding: 15px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-    width: 320px; /* スマホ向けに固定幅、必要ならwidth: 90vw; などに調整 */
-    height: auto; /* 高さはコンテンツに合わせて自動調整 */
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    position: relative;
-    overflow: hidden;
-    border: 1px solid #c0c0c0;
-    margin: 20px auto; /* 上下の余白と中央寄せ */
-}
-
-/* サイドのミントグリーン（ターコイズブルー）のアクセント */
-.calculator-container::before,
-.calculator-container::after {
-    content: '';
-    position: absolute;
-    /* 液晶の下から始まるように調整 */
-    /* top-panel(約30px) + display(約90px) + tab-container(約50px) + gap(12px) = 約182px (おおよそ) */
-    top: 182px; /* この値は適宜調整してください */
-    width: 15px;
-    bottom: 0;
-    background-color: #55c4b8; /* CASIO参考画像のミントグリーンに近い色 */
-    z-index: 0;
-}
-.calculator-container::before {
-    left: 0;
-    border-bottom-left-radius: 12px;
-}
-.calculator-container::after {
-    right: 0;
-    border-bottom-right-radius: 12px;
-}
-
-.top-panel {
-    background-color: #d0d0d0;
-    border-radius: 8px;
-    padding: 10px 15px 5px;
-    margin-bottom: 5px;
-    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
-    text-align: center;
-    font-size: 0.8em;
-    color: #666;
-    position: relative;
-    z-index: 1;
-}
-
-.display {
-    background-color: #71807d;
-    color: #c9f500;
-    padding: 15px;
-    border-radius: 8px;
-    text-align: right;
-    font-size: 2.5em;
-    font-family: 'Orbitron', monospace; /* 電子っぽいフォント */
-    min-height: 55px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    overflow: hidden;
-    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.4), 0 0 10px rgba(201, 245, 0, 0.2);
-    letter-spacing: 1px;
-    position: relative;
-    z-index: 1;
-}
-
-#organization-name {
-    margin: 0;
-    padding: 0;
-    white-space: nowrap;
-    text-shadow: 0 0 6px rgba(201, 245, 0, 0.7);
-}
-
-/* タブコンテナ */
-.tab-container {
-    display: flex;
-    justify-content: center;
-    background-color: #c0c0c0; /* タブの背景色 */
-    border-radius: 8px;
-    overflow: hidden;
-    margin-bottom: 12px; /* ボタンとの間隔 */
-    z-index: 1; /* 手前に表示 */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* タブ自体にも影 */
-}
-
-.tab-button {
-    flex-grow: 1;
-    padding: 10px 0;
-    text-align: center;
-    font-weight: bold;
-    color: #555;
-    cursor: pointer;
-    background-color: #e0e0e0; /* 非アクティブ時のタブ色 */
-    transition: background-color 0.2s, color 0.2s;
-    border-right: 1px solid #b0b0b0; /* 区切り線 */
-}
-
-.tab-button:last-child {
-    border-right: none;
-}
-
-.tab-button.active {
-    background-color: #55c4b8; /* アクティブなタブの色 */
-    color: white;
-    box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
-}
-
-.tab-button:hover {
-    background-color: #d0d0d0;
-}
-.tab-button.active:hover {
-    background-color: #4aada1; /* アクティブ時のホバー */
-}
-
-/* ボタンのグリッド */
-.buttons-grid {
-    position: relative; /* tab-contentの絶対配置のため */
-    height: 330px; /* 全てのボタンが収まる高さを固定（スマホで調整） */
-    min-height: 250px; /* キーがない場合の最小高さを確保 */
-    z-index: 1;
-}
-
-.tab-content {
-    display: none; /* デフォルトでは非表示 */
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: grid; /* これでグリッドレイアウトを有効化 */
-    grid-template-columns: repeat(5, 1fr); /* 5列 */
-    /* グリッドの行を定義: メインコンテンツのボタンに合わせて行を定義 */
-    /* 7,8,9行 / 4,5,6行 / 1,2,3行 / 0,.行 / =行 */
-    grid-template-rows: repeat(5, 1fr); /* 5行 */
-    gap: 10px; /* キー間の間隔を広げる */
-    transition: opacity 0.3s ease-in-out;
-    opacity: 0;
-    pointer-events: none; /* 非アクティブ時はクリックできないように */
-}
-
-.tab-content.active {
-    display: grid; /* アクティブなタブだけ表示 */
-    opacity: 1;
-    pointer-events: auto; /* アクティブ時はクリック可能に */
-}
-
-/* キーの共通スタイル */
-.button {
-    background-color: #ffffff;
-    color: #333;
-    padding: 12px 0;
-    border-radius: 8px; /* 少し丸みを強める */
-    text-align: center;
-    font-size: 1.4em;
-    font-weight: 500;
-    cursor: pointer;
-    text-decoration: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: background-color 0.2s, box-shadow 0.1s, transform 0.1s;
+    background-color: #f4f4f4;
     
-    /* 本物の電卓のような立体感を出すCSS */
-    border: none; /* ボーダーは使わない */
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15), /* 外側の影 */
-                inset 0 1px 0 rgba(255, 255, 255, 0.6), /* 上部のハイライト */
-                inset 0 -2px 0 rgba(0, 0, 0, 0.15); /* 下部の影 */
+    /* 背景画像の設定 */
+    background-image: url('study3.png'); /* ここに指定の画像ファイル名 */
+    background-size: cover; /* 画面全体に画像を拡大・縮小して表示 */
+    background-position: center; /* 画像を中央に配置 */
+    background-attachment: fixed; /* スクロールしても背景画像を固定 */
+    background-repeat: no-repeat; /* 画像を繰り返さない */
+}
+
+/* ヘッダー */
+header {
+    background-color: rgba(51, 51, 51, 0.8); /* 半透明の背景 */
+    color: #fff;
+    padding: 1rem 0;
+    text-align: center;
+    position: sticky; /* スクロールしてもヘッダーを上部に固定 */
+    top: 0;
+    z-index: 1000;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+}
+
+header nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+header nav ul li {
+    margin: 0 15px;
+}
+
+header nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+header nav ul li a:hover {
+    color: #ffd700; /* ホバー時の色 */
+}
+
+/* メインコンテンツ */
+main {
+    padding: 20px;
+    max-width: 960px;
+    margin: 20px auto;
+    background-color: rgba(255, 255, 255, 0.9); /* 半透明の白背景でコンテンツを読みやすく */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+section {
+    padding: 40px 0;
+    border-bottom: 1px solid #eee;
+}
+
+section:last-child {
+    border-bottom: none;
+}
+
+section h2, section h3 {
+    text-align: center;
+    color: #007bff;
+    margin-bottom: 20px;
+}
+
+/* ヒーローセクション（ファーストビュー） */
+#hero {
+    text-align: center;
+    padding: 80px 0;
+    background-color: rgba(240, 248, 255, 0.8); /* ヒーローセクションの背景 */
+    border-radius: 8px;
+    margin-bottom: 40px;
+}
+
+#hero h2 {
+    font-size: 3rem;
+    color: #0056b3;
+}
+
+#hero p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+.button {
+    display: inline-block;
+    background-color: #007bff;
+    color: #fff;
+    padding: 12px 25px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
 }
 
 .button:hover {
-    background-color: #f0f0f0;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2),
-                inset 0 1px 0 rgba(255, 255, 255, 0.7),
-                inset 0 -2px 0 rgba(0, 0, 0, 0.2);
+    background-color: #0056b3;
 }
 
-.button:active {
-    transform: translateY(2px); /* 押された感を強調 */
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1),
-                inset 0 1px 0 rgba(255, 255, 255, 0.5),
-                inset 0 -1px 0 rgba(0, 0, 0, 0.1);
-    background-color: #e8e8e8;
+/* フッター */
+footer {
+    background-color: rgba(51, 51, 51, 0.8);
+    color: #fff;
+    text-align: center;
+    padding: 1rem 0;
+    margin-top: 20px;
 }
 
-/* AC, C ボタン (赤紫系) */
-.button-ac, .button-c {
-    background-color: #db7093;
-    color: white;
-    font-size: 1.2em;
-    font-weight: bold;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.4), inset 0 -2px 0 rgba(0, 0, 0, 0.2);
-}
-.button-ac:hover, .button-c:hover { background-color: #c05a81; }
-.button-ac:active, .button-c:active { background-color: #a8476f; }
-
-/* 演算子ボタン (濃いグレー/黒系) */
-.button-operator {
-    background-color: #555;
-    color: white;
-    font-weight: bold;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.4), inset 0 -2px 0 rgba(0, 0, 0, 0.2);
-}
-.button-operator:hover { background-color: #444; }
-.button-operator:active { background-color: #333; }
-
-/* メモリーボタン (青紫系) */
-.button-mem {
-    background-color: #8a2be2;
-    color: white;
-    font-size: 1.2em;
-    font-weight: bold;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.4), inset 0 -2px 0 rgba(0, 0, 0, 0.2);
-}
-.button-mem:hover { background-color: #721bb8; }
-.button-mem:active { background-color: #5c1496; }
-
-/* ダミーキーのスタイル */
-.dummy-key {
-    background-color: transparent;
-    border: none;
-    box-shadow: none;
-    cursor: default;
-    pointer-events: none; /* クリックを無効化 */
-}
-
-/* 各ボタンのグリッド配置を細かく指定 (main-content用) */
-#main-content .ac-key { grid-area: 1 / 1 / 2 / 2; }
-#main-content .seven-key { grid-area: 1 / 2 / 2 / 3; }
-#main-content .eight-key { grid-area: 1 / 3 / 2 / 4; }
-#main-content .nine-key { grid-area: 1 / 4 / 2 / 5; }
-#main-content .divide-key { grid-area: 1 / 5 / 2 / 6; }
-
-#main-content .c-key { grid-area: 2 / 1 / 3 / 2; }
-#main-content .four-key { grid-area: 2 / 2 / 3 / 3; }
-#main-content .five-key { grid-area: 2 / 3 / 3 / 4; }
-#main-content .six-key { grid-area: 2 / 4 / 3 / 5; }
-#main-content .multiply-key { grid-area: 2 / 5 / 3 / 6; }
-
-#main-content .dummy-key:nth-of-type(3) { grid-area: 3 / 1 / 4 / 2; } /* 1列目の3行目のダミー */
-#main-content .one-key { grid-area: 3 / 2 / 4 / 3; }
-#main-content .two-key { grid-area: 3 / 3 / 4 / 4; }
-#main-content .three-key { grid-area: 3 / 4 / 4 / 5; }
-#main-content .minus-key { grid-area: 3 / 5 / 4 / 6; }
-
-#main-content .dummy-key:nth-of-type(4) { grid-area: 4 / 1 / 5 / 2; } /* 1列目の4行目のダミー */
-#main-content .zero-key { grid-area: 4 / 2 / 5 / 4; } /* 0は4行目の2列目から3列目まで (2マス分) */
-#main-content .dot-key { grid-area: 4 / 4 / 5 / 5; }
-#main-content .plus-key { grid-area: 4 / 5 / 5 / 6; }
-
-/* =キーは5行目5列目。縦に2マス分 */
-#main-content .dummy-key:nth-of-type(5) { grid-area: 5 / 1 / 6 / 2; } /* 1列目の5行目のダミー */
-#main-content .dummy-key:nth-of-type(6) { grid-area: 5 / 2 / 6 / 3; }
-#main-content .dummy-key:nth-of-type(7) { grid-area: 5 / 3 / 6 / 4; }
-#main-content .dummy-key:nth-of-type(8) { grid-area: 5 / 4 / 6 / 5; }
-#main-content .equals-key { grid-area: 5 / 5 / 7 / 6; } /* 5行目から7行目まで (縦2マス分) */
-
-
-/* 各ボタンのグリッド配置を細かく指定 (memory-content用) */
-#memory-content .mc-key { grid-area: 1 / 1 / 2 / 2; }
-#memory-content .mr-key { grid-area: 1 / 2 / 2 / 3; }
-#memory-content .m-minus-key { grid-area: 1 / 3 / 2 / 4; }
-#memory-content .m-plus-key { grid-area: 1 / 4 / 2 / 5; }
-#memory-content .dummy-key:nth-of-type(1) { grid-area: 1 / 5 / 2 / 6; } /* 5列目を埋める */
-
-/* その他のダミーキーは自動配置されるはずですが、必要なら細かく指定 */
-#memory-content .dummy-key:nth-of-type(2) { grid-area: 2 / 1 / 3 / 2; }
-#memory-content .dummy-key:nth-of-type(3) { grid-area: 2 / 2 / 3 / 3; }
-/* ...以下、必要に応じてダミーキーのグリッドエリアを細かく指定... */
-
-
-/* スマートフォンでの表示調整 */
-/* width: 320px; で固定しているため、メディアクエリは不要な場合もありますが、
-   より小さな画面への対応や、相対幅にする場合は残します */
-@media (max-width: 360px) { /* iPhone SE などの幅に対応 */
-    .calculator-container {
-        width: 95vw; /* 画面幅の95%に調整 */
-        padding: 10px;
-        gap: 8px;
+/* スマートフォン対応 */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
     }
-    .display {
-        font-size: 2em;
-        padding: 12px;
-        min-height: 45px;
+
+    header nav ul {
+        flex-direction: column;
     }
-    .button {
-        font-size: 1.2em;
-        padding: 10px 0;
-        border-radius: 5px;
+
+    header nav ul li {
+        margin: 5px 0;
     }
-    .calculator-container::before,
-    .calculator-container::after {
-        width: 10px;
-        top: 100px; /* スマホ表示に合わせて開始位置を調整 */
+
+    main {
+        padding: 15px;
+        margin: 15px auto;
     }
-    /* ボタンのグリッド間隔なども再調整 */
-    .tab-content {
-        gap: 8px;
+
+    #hero {
+        padding: 50px 0;
+    }
+
+    #hero h2 {
+        font-size: 2.2rem;
+    }
+
+    #hero p {
+        font-size: 1rem;
     }
 }
