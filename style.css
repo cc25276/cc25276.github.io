@@ -183,6 +183,8 @@ footer {
         padding: 10px;
     }
 }
-.p {
-    text-align: center; /* これを追加 */
+/* style.css の任意の場所に追加 */
+
+.center-text {
+    text-align: center;
 }
