@@ -81,7 +81,7 @@ section h2, section h3 {
 /* ファイルグリッドレイアウト */
 .file-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* 2列表示 */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* PCでは2列表示 */
     gap: 25px; /* ファイルアイテム間の間隔 */
     padding: 20px 0;
 }
@@ -193,15 +193,32 @@ footer {
         padding: 25px 0;
     }
 
-    /* ファイルグリッドをスマホでも2列に */
+    /* ファイルグリッドをスマホでも確実に2列にする */
     .file-grid {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* スマホでも2列にするための調整 */
-        gap: 15px; /* スマホ向けに間隔を調整 */
+        grid-template-columns: 1fr 1fr; /* 画面幅を均等に2分割し、常に2列表示 */
+        gap: 10px; /* スマホ向けに間隔をさらに詰める */
+        padding: 10px 0; /* 必要ならパディングも詰める */
     }
 
-    /* .file-item のmax-widthとmarginは不要になることが多いので削除推奨 */
+    /* .file-item の最大幅と中央寄せは不要になるので削除 */
     .file-item {
-        /* max-width: 350px; /* ここは削除またはコメントアウト */
-        /* margin: 0 auto;   /* ここは削除またはコメントアウト */
+        max-width: none; /* グリッドに幅を任せる */
+        margin: 0;   /* グリッドに配置を任せる */
+    }
+
+    /* ファイル名が小さくなりすぎるのを防ぐため、フォントサイズを微調整 */
+    .file-item .file-name {
+        font-size: 0.85rem; /* PC版より小さく */
+        padding: 10px; /* パディングも詰める */
+    }
+
+    /* PDFプレビューコンテナのパディングトップも調整して高さを詰める */
+    .file-item .pdf-preview-container {
+        padding-top: 85%; /* 縦長になりすぎないよう少し調整（例: 4:3から少しだけ縦長に） */
+    }
+
+    /* オーバーレイのフォントサイズも調整 */
+    .file-item .pdf-preview-container .overlay {
+        font-size: 1rem; /* PC版より小さく */
     }
 }
