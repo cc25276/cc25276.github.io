@@ -7,7 +7,7 @@ body {
     background-color: #f4f4f4;
     
     /* 背景画像の設定 */
-    background-image: url('ノート背景.png'); /* ここに指定の画像ファイル名 */
+    background-image: url('picture/ノート背景.png'); /* ここに指定の画像ファイル名 */
     background-size: cover; /* 画面全体に画像を拡大・縮小して表示 */
     background-position: center; /* 画像を中央に配置 */
     background-attachment: fixed; /* スクロールしても背景画像を固定 */
