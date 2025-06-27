@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CASIO風 電卓サイト (シンプルキー)</title>
+    <title>スマホ向け電卓サイト</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="gstatic.com" crossorigin>
@@ -12,49 +12,70 @@
 <body>
     <div class="calculator-container">
         <div class="top-panel">
-            <span>CASIO</span>
-            <div style="float: right; font-size: 0.9em;">AZ-265 <span>12</span> ECO BATTERY</div>
+            <span>YOUR ORGANIZATION</span>
+            <div style="float: right; font-size: 0.9em;">INFO HERE</div>
             <div style="clear: both;"></div>
         </div>
 
         <div class="display">
-            <p id="organization-name">団体名やメッセージ</p>
+            <p id="organization-name">ここにメッセージ</p>
+        </div>
+
+        <div class="tab-container">
+            <div class="tab-button active" data-tab="main">MAIN</div>
+            <div class="tab-button" data-tab="memory">MEM</div>
         </div>
 
         <div class="buttons-grid">
-            <a href="mc.html" class="button button-mem mc-key">MC</a>
-            <a href="mr.html" class="button button-mem mr-key">MR</a>
-            <a href="m_minus.html" class="button button-mem m-minus-key">M-</a>
-            <a href="m_plus.html" class="button button-mem m-plus-key">M+</a>
-            <a href="ac.html" class="button button-ac ac-key">AC</a>
-            
-            <a href="seven.html" class="button seven-key">7</a>
-            <a href="eight.html" class="button eight-key">8</a>
-            <a href="nine.html" class="button nine-key">9</a>
+            <div class="tab-content active" id="main-content">
+                <a href="ac.html" class="button button-ac">AC</a>
+                <a href="seven.html" class="button">7</a>
+                <a href="eight.html" class="button">8</a>
+                <a href="nine.html" class="button">9</a>
+                <a href="divide.html" class="button button-operator">÷</a>
 
-            <a href="divide.html" class="button button-operator divide-key">÷</a>
+                <a href="c.html" class="button button-c">C</a>
+                <a href="four.html" class="button">4</a>
+                <a href="five.html" class="button">5</a>
+                <a href="six.html" class="button">6</a>
+                <a href="multiply.html" class="button button-operator">×</a>
 
-            <a href="c.html" class="button button-c c-key">C</a>
+                <a href="one.html" class="button">1</a>
+                <a href="two.html" class="button">2</a>
+                <a href="three.html" class="button">3</a>
+                <a href="minus.html" class="button button-operator">-</a>
 
-            <a href="four.html" class="button four-key">4</a>
-            <a href="five.html" class="button five-key">5</a>
-            <a href="six.html" class="button six-key">6</a>
-            
-            <a href="multiply.html" class="button button-operator multiply-key">×</a>
-
-            <a href="one.html" class="button one-key">1</a>
-            <a href="two.html" class="button two-key">2</a>
-            <a href="three.html" class="button three-key">3</a>
-
-            <a href="minus.html" class="button button-operator minus-key">-</a>
-
-            <a href="zero.html" class="button zero-key">0</a>
-            
-            <a href="plus.html" class="button button-operator plus-key">+</a>
-
-            <a href="equals.html" class="button button-operator equals-key">=</a>
-
+                <a href="zero.html" class="button button-zero">0</a>
+                <a href="dot.html" class="button">.</a>
+                <a href="equals.html" class="button button-operator equals-key">=</a>
+                <a href="plus.html" class="button button-operator">+</a>
             </div>
+
+            <div class="tab-content" id="memory-content">
+                <a href="mc.html" class="button button-mem">MC</a>
+                <a href="mr.html" class="button button-mem">MR</a>
+                <a href="m_minus.html" class="button button-mem">M-</a>
+                <a href="m_plus.html" class="button button-mem">M+</a>
+                <div class="dummy-key button"></div>
+                <div class="dummy-key button"></div>
+                <div class="dummy-key button"></div>
+                <div class="dummy-key button"></div>
+                <div class="dummy-key button"></div>
+                <div class="dummy-key button"></div>
+                <div class="dummy-key button"></div>
+                <div class="dummy-key button"></div>
+                <div class="dummy-key button"></div>
+                <div class="dummy-key button"></div>
+                <div class="dummy-key button"></div>
+                <div class="dummy-key button"></div>
+                <div class="dummy-key button"></div>
+                <div class="dummy-key button"></div>
+                <div class="dummy-key button"></div>
+                <div class="dummy-key button"></div>
+            </div>
+        </div>
     </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
