@@ -4,23 +4,22 @@ body {
     font-family: 'Arial', sans-serif;
     line-height: 1.6;
     color: #333;
-    background-color: #f4f4f4; /* 背景画像が表示されない場合のフォールバック */
+    background-color: #f4f4f4; 
     
-    /* 背景画像の設定 */
-    background-image: url('picture/study3.png'); /* pictureフォルダ内のstudy3.pngを指定 */
-    background-size: cover; /* 画面全体に画像を拡大・縮小して表示 */
-    background-position: center; /* 画像を中央に配置 */
-    background-attachment: fixed; /* スクロールしても背景画像を固定 */
-    background-repeat: no-repeat; /* 画像を繰り返さない */
+    background-image: url('picture/study3.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
 }
 
 /* ヘッダー */
 header {
-    background-color: rgba(51, 51, 51, 0.8); /* 半透明の背景 */
+    background-color: rgba(51, 51, 51, 0.8);
     color: #fff;
     padding: 1rem 0;
     text-align: center;
-    position: sticky; /* スクロールしてもヘッダーを上部に固定 */
+    position: sticky;
     top: 0;
     z-index: 1000;
 }
@@ -50,21 +49,21 @@ header nav ul li a {
 }
 
 header nav ul li a:hover {
-    color: #ffd700; /* ホバー時の色 */
+    color: #ffd700;
 }
 
 /* メインコンテンツ */
 main {
-    padding: 20px; /* PCでのパディング */
+    padding: 20px;
     max-width: 960px;
-    margin: 20px auto; /* PCでのマージン */
-    background-color: rgba(255, 255, 255, 0.9); /* 半透明の白背景でコンテンツを読みやすく */
+    margin: 20px auto;
+    background-color: rgba(255, 255, 255, 0.9);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
 }
 
 section {
-    padding: 40px 0; /* PCでのセクションパディング */
+    padding: 40px 0;
     border-bottom: 1px solid #eee;
 }
 
@@ -82,7 +81,7 @@ section h2, section h3 {
 .file-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* PCでは2列表示 */
-    gap: 25px; /* ファイルアイテム間の間隔 */
+    gap: 25px;
     padding: 20px 0;
 }
 
@@ -96,7 +95,8 @@ section h2, section h3 {
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* ファイル名が下に揃うように */
+    justify-content: center; /* プレビューがないので中央寄せ */
+    min-height: 100px; /* アイテムの最小高さを確保 */
 }
 
 .file-item:hover {
@@ -104,58 +104,24 @@ section h2, section h3 {
     box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
-.pdf-preview-container {
-    position: relative;
-    width: 100%;
-    padding-top: 75%; /* 4:3のアスペクト比 (高さ / 幅 * 100) */
-    overflow: hidden;
-    background-color: #e9e9e9; /* プレビューがない場合の背景 */
-    cursor: pointer; /* クリック可能であることを示す */
-}
-
-.pdf-thumbnail {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: contain; /* 画像全体が表示されるように */
-    display: block;
-}
-
-.pdf-preview-container .overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.6); /* 半透明の黒 */
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.2rem;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.pdf-preview-container:hover .overlay {
-    opacity: 1; /* ホバーでオーバーレイを表示 */
-}
+/* ★修正点: pdf-preview-containerと関連スタイルを削除 */
+/* .pdf-preview-container { ... } */
+/* .pdf-thumbnail { ... } */
+/* .pdf-preview-container .overlay { ... } */
 
 .file-name {
     padding: 15px;
     font-weight: bold;
     color: #007bff;
-    text-decoration: none; /* <a>タグのデフォルトの下線を消す */
-    cursor: pointer; /* クリック可能であることを示す */
-    margin: 0; /* 余分なマージンを削除 */
-    word-wrap: break-word; /* 長いファイル名で改行 */
-    display: block; /* <a>タグをブロック要素にして、パディングなどを適用しやすくする */
+    text-decoration: none;
+    cursor: pointer;
+    margin: 0;
+    word-wrap: break-word;
+    display: block;
 }
 
 .file-name:hover {
-    text-decoration: underline; /* ホバーで下線を表示 */
+    text-decoration: underline;
 }
 
 /* フッター */
@@ -182,43 +148,31 @@ footer {
         margin: 5px 0;
     }
 
-    /* main要素のパディングとマージンを減らす */
     main {
         padding: 10px;
         margin: 10px auto;
     }
 
-    /* 各セクションのパディングも少し減らす */
     section {
         padding: 25px 0;
     }
 
     /* ファイルグリッドをスマホでも確実に2列にする */
     .file-grid {
-        grid-template-columns: 1fr 1fr; /* 画面幅を均等に2分割し、常に2列表示 */
-        gap: 10px; /* スマホ向けに間隔をさらに詰める */
-        padding: 10px 0; /* 必要ならパディングも詰める */
+        grid-template-columns: 1fr 1fr; /* 強制的に2列に分割 */
+        gap: 10px; /* 間隔を詰める */
+        padding: 10px 0;
     }
 
-    /* .file-item の最大幅と中央寄せは不要になるので削除 */
+    /* .file-item の調整 */
     .file-item {
-        max-width: none; /* グリッドに幅を任せる */
-        margin: 0;   /* グリッドに配置を任せる */
+        max-width: none;
+        margin: 0;
+        min-height: 80px; /* プレビューがなくなった分、高さを調整 */
     }
 
-    /* ファイル名が小さくなりすぎるのを防ぐため、フォントサイズを微調整 */
     .file-item .file-name {
-        font-size: 0.85rem; /* PC版より小さく */
-        padding: 10px; /* パディングも詰める */
-    }
-
-    /* PDFプレビューコンテナのパディングトップも調整して高さを詰める */
-    .file-item .pdf-preview-container {
-        padding-top: 85%; /* 縦長になりすぎないよう少し調整（例: 4:3から少しだけ縦長に） */
-    }
-
-    /* オーバーレイのフォントサイズも調整 */
-    .file-item .pdf-preview-container .overlay {
-        font-size: 1rem; /* PC版より小さく */
+        font-size: 0.85rem;
+        padding: 10px;
     }
 }
