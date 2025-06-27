@@ -9,7 +9,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ファイル名がクリックされた時の処理
     fileNames.forEach(fileNameElement => {
-        fileNameElement.addEventListener('click', () => {
+        fileNameElement.addEventListener('click', (event) => { // イベントオブジェクトを受け取る
+            event.preventDefault(); // ★ここが追加された行です。デフォルトのクリック動作をキャンセル
+
             currentFilePath = fileNameElement.dataset.filePath; // data-file-pathからパスを取得
             const fileName = fileNameElement.textContent; // ファイル名テキストを取得
 
@@ -24,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // ダウンロードを実行
             const link = document.createElement('a');
             link.href = currentFilePath;
-            link.download = downloadFileNameSpan.textContent; // ポップアップに表示されたファイル名をダウンロード名とする
+            link.download = downloadFileNameSpan.textContent; 
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
@@ -40,6 +42,4 @@ document.addEventListener('DOMContentLoaded', () => {
         downloadPopup.style.display = 'none'; // ポップアップを閉じる
         currentFilePath = ''; // パスをリセット
     });
-
-    // ポップアップの背景をクリックしても閉じないように、クリックイベントはボタンにのみ設定
 });
