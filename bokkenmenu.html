@@ -7,127 +7,115 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="login-container">
-        <div class="login-box">
-            <h1>資料管理サイト</h1>
-            <h2>ログイン</h2>
-            <form id="login-form">
-                <label for="studentId">学籍番号:</label>
-                <input type="text" id="studentId" required><br><br>
-                <label for="password">パスワード:</label>
-                <input type="password" id="password" required><br><br>
-                <button type="submit">ログイン</button>
-                <p id="error-message" class="error-message" style="display: none;">学籍番号またはパスワードが違います。</p>
-            </form>
-        </div>
-    </div>
+    <header>
+        <h1>資料管理サイト</h1>
+        <nav>
+            <ul>
+                <li><a href="#lectures">講義資料</a></li>
+                <li><a href="#financials">財務諸表</a></li>
+                <li><a href="#contact">Coming Soon …</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <div id="main-content" style="display: none;">
-        <header>
-            <h1>資料管理サイト</h1>
-            <nav>
-                <ul>
-                    <li><a href="#lectures">講義資料</a></li>
-                    <li><a href="#financials">財務諸表</a></li>
-                    <li><a href="#contact">お問い合わせ</a></li>
-                </ul>
-            </nav>
-        </header>
+    <main>
+        <section id="lectures">
+            <h2>講義資料</h2> 
 
-        <main>
-            <section id="lectures">
-                <h2>講義資料</h2> 
-                <p class="section-description">こちらでは、共有したい講義資料のPDFファイルを掲載しています。</p>
-
-                <h3 class="topic-title">金銭債権</h3>
-                <div class="file-grid">
-                    <div class="file-item">
-                        <a href="files/lecture_material_01.pdf" download class="file-name">講義資料_20250101.pdf</a>
-                    </div>
-                    <div class="file-item">
-                        <a href="files/lecture_material_02.pdf" download class="file-name">講義資料_20250115.pdf</a>
-                    </div>
-                    <div class="file-item">
-                        <a href="files/lecture_material_03.pdf" download class="file-name">講義資料_20250201.pdf</a>
-                    </div>
-                    <div class="file-item">
-                        <a href="files/lecture_material_04.pdf" download class="file-name">講義資料_20250215.pdf</a>
-                    </div>
+            <h3 class="topic-title">金銭債権</h3>
+            <div class="file-grid">
+                <div class="file-item">
+                    <a href="files/lecture_material_01.pdf" download class="file-name">講義資料_20250101.pdf</a>
                 </div>
 
-                <h3 class="topic-title">商品売買・棚卸資産</h3>
-                <div class="file-grid">
-                    <div class="file-item">
-                        <a href="files/lecture_material_01.pdf" download class="file-name">講義資料_20250101.pdf</a>
-                    </div>
-                    <div class="file-item">
-                        <a href="files/lecture_material_02.pdf" download class="file-name">講義資料_20250115.pdf</a>
-                    </div>
-                    <div class="file-item">
-                        <a href="files/lecture_material_03.pdf" download class="file-name">講義資料_20250201.pdf</a>
-                    </div>
-                    <div class="file-item">
-                        <a href="files/lecture_material_04.pdf" download class="file-name">講義資料_20250215.pdf</a>
-                    </div>
+                <div class="file-item">
+                    <a href="files/lecture_material_02.pdf" download class="file-name">講義資料_20250115.pdf</a>
                 </div>
 
-                <h3 class="topic-title">総合問題</h3>
-                <div class="file-grid">
-                    <div class="file-item">
-                        <a href="files/lecture_material_01.pdf" download class="file-name">講義資料_20250101.pdf</a>
-                    </div>
-                    <div class="file-item">
-                        <a href="files/lecture_material_02.pdf" download class="file-name">講義資料_20250115.pdf</a>
-                    </div>
-                    <div class="file-item">
-                        <a href="files/lecture_material_03.pdf" download class="file-name">講義資料_20250201.pdf</a>
-                    </div>
-                    <div class="file-item">
-                        <a href="files/lecture_material_04.pdf" download class="class="file-name">講義資料_20250215.pdf</a>
-                    </div>
+                <div class="file-item">
+                    <a href="files/lecture_material_03.pdf" download class="file-name">講義資料_20250201.pdf</a>
+                </div>
+                <div class="file-item">
+                    <a href="files/lecture_material_04.pdf" download class="file-name">講義資料_20250215.pdf</a>
+                </div>
+            </div>
+
+            <h3 class="topic-title">商品売買・棚卸資産</h3>
+            <div class="file-grid">
+                <div class="file-item">
+                    <a href="files/lecture_material_01.pdf" download class="file-name">講義資料_20250101.pdf</a>
                 </div>
 
-                <h3 class="topic-title">企業会計・公準及び基礎知識</h3>
-                <div class="file-grid">
-                    <div class="file-item">
-                        <a href="files/lecture_material_01.pdf" download class="file-name">講義資料_20250101.pdf</a>
-                    </div>
-                    <div class="file-item">
-                        <a href="files/lecture_material_02.pdf" download class="class="file-name">講義資料_20250115.pdf</a>
-                    </div>
-                    <div class="file-item">
-                        <a href="files/lecture_material_03.pdf" download class="class="file-name">講義資料_20250201.pdf</a>
-                    </div>
-                    <div class="file-item">
-                        <a href="files/lecture_material_04.pdf" download class="class="file-name">講義資料_20250215.pdf</a>
-                    </div>
+                <div class="file-item">
+                    <a href="files/lecture_material_02.pdf" download class="file-name">講義資料_20250115.pdf</a>
                 </div>
-            </section>
 
-            <section id="financials">
-                <h2>財務諸表</h2>
-                <p class="section-description">こちらでは、共有したい財務諸表のPDFファイルを掲載しています。</p>
-                <div class="file-grid">
-                    <div class="file-item">
-                        <a href="files/financial_statement_2023.pdf" download class="file-name">財務諸表_2023年度.pdf</a>
-                    </div>
-
-                    <div class="file-item">
-                        <a href="files/financial_statement_2024.pdf" download class="file-name">財務諸表_2024年度.pdf</a>
-                    </div>
+                <div class="file-item">
+                    <a href="files/lecture_material_03.pdf" download class="file-name">講義資料_20250201.pdf</a>
                 </div>
-            </section>
+                <div class="file-item">
+                    <a href="files/lecture_material_04.pdf" download class="file-name">講義資料_20250215.pdf</a>
+                </div>
+            </div>
 
-            <section id="contact">
-                <h2>お問い合わせ</h2>
-                <p class="section-description">ご質問やご意見がありましたら、お気軽にお問い合わせください。</p>
-                <p class="section-description">メールアドレス: info@example.com</p>
-            </section>
-        </main>
+            <h3 class="topic-title">総合問題</h3>
+            <div class="file-grid">
+                <div class="file-item">
+                    <a href="files/lecture_material_01.pdf" download class="file-name">講義資料_20250101.pdf</a>
+                </div>
 
-        <footer>
-            <p>&copy; 2025 私のホームページ. All rights reserved.</p>
-        </footer>
-    </div> <script src="login.js"></script>
+                <div class="file-item">
+                    <a href="files/lecture_material_02.pdf" download class="file-name">講義資料_20250115.pdf</a>
+                </div>
+
+                <div class="file-item">
+                    <a href="files/lecture_material_03.pdf" download class="file-name">講義資料_20250201.pdf</a>
+                </div>
+                <div class="file-item">
+                    <a href="files/lecture_material_04.pdf" download class="file-name">講義資料_20250215.pdf</a>
+                </div>
+            </div>
+
+            <h3 class="topic-title">企業会計・公準及び基礎知識</h3>
+            <div class="file-grid">
+                <div class="file-item">
+                    <a href="files/lecture_material_01.pdf" download class="file-name">講義資料_20250101.pdf</a>
+                </div>
+
+                <div class="file-item">
+                    <a href="files/lecture_material_02.pdf" download class="file-name">講義資料_20250115.pdf</a>
+                </div>
+
+                <div class="file-item">
+                    <a href="files/lecture_material_03.pdf" download class="file-name">講義資料_20250201.pdf</a>
+                </div>
+                <div class="file-item">
+                    <a href="files/lecture_material_04.pdf" download class="file-name">講義資料_20250215.pdf</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="financials">
+            <h2>財務諸表</h2>
+            <div class="file-grid">
+                <div class="file-item">
+                    <a href="files/financial_statement_2023.pdf" download class="file-name">財務諸表_2023年度.pdf</a>
+                </div>
+
+                <div class="file-item">
+                    <a href="files/financial_statement_2024.pdf" download class="file-name">財務諸表_2024年度.pdf</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Coming Soon …</h2>
+            <p class="center-text">現在開発中です。</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 簿記会計研究会. All rights reserved.</p>
+    </footer>
 </body>
 </html>
