@@ -70,7 +70,6 @@ section:last-child {
     border-bottom: none;
 }
 
-/* ★修正点: h2とh3のスタイルを調整 */
 section h2 { /* h2はセクション全体のタイトルとして中央揃え */
     text-align: center;
     color: #007bff;
@@ -86,6 +85,14 @@ section h2 { /* h2はセクション全体のタイトルとして中央揃え *
     margin-bottom: 15px; /* 下部にスペース */
     border-bottom: 1px dashed #ccc; /* 軽く区切り線を追加（任意） */
     padding-bottom: 5px; /* 区切り線との間隔 */
+}
+
+/* ★追加：セクションの説明文を中央揃えにするためのスタイル */
+.section-description {
+    text-align: center;
+    margin-bottom: 25px; /* 下に少し余白 */
+    font-size: 1.05rem; /* 少し大きくしても良い */
+    color: #555; /* 色を少し薄くしても良い */
 }
 
 
@@ -140,6 +147,79 @@ footer {
     margin-top: 20px;
 }
 
+/* ★追加：ログイン画面のスタイル */
+#login-container {
+    display: flex; /* Flexboxで中央寄せ */
+    justify-content: center; /* 水平方向の中央 */
+    align-items: center; /* 垂直方向の中央 */
+    min-height: 100vh; /* 画面全体の高さ */
+    background-image: url('picture/study3.png'); /* 背景画像はbodyから引き継がれるが、明示的に指定 */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.login-box {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 400px;
+    width: 90%; /* スマホ対応 */
+}
+
+.login-box h1 {
+    font-size: 2.2rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.login-box h2 {
+    font-size: 1.8rem;
+    color: #007bff;
+    margin-bottom: 30px;
+}
+
+.login-box label {
+    display: block;
+    text-align: left;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+}
+
+.login-box input[type="text"],
+.login-box input[type="password"] {
+    width: calc(100% - 20px); /* パディング分を考慮 */
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.login-box button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.login-box button:hover {
+    background-color: #0056b3;
+}
+
+.error-message {
+    color: red;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
 
 /* スマートフォン対応（@media クエリ） */
 @media (max-width: 768px) {
@@ -167,7 +247,7 @@ footer {
     /* ファイルグリッドをスマホでも確実に2列にする */
     .file-grid {
         grid-template-columns: 1fr 1fr; /* 強制的に2列に分割 */
-        gap: 10px; /* 間隔を詰める */
+        gap: 10px;
         padding: 10px 0;
     }
 
@@ -175,16 +255,24 @@ footer {
     .file-item {
         max-width: none;
         margin: 0;
-        min-height: 80px; /* プレビューがなくなった分、高さを調整 */
+        min-height: 80px;
     }
 
     .file-item .file-name {
         font-size: 0.85rem;
         padding: 10px;
     }
-}
-/* style.css の任意の場所に追加 */
+    
+    /* ログインボックスのスマホ向け調整 */
+    .login-box {
+        padding: 25px;
+    }
 
-.center-text {
-    text-align: center;
+    .login-box h1 {
+        font-size: 1.8rem;
+    }
+
+    .login-box h2 {
+        font-size: 1.5rem;
+    }
 }
