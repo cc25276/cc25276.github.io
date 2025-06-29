@@ -1,45 +1,43 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const fileNames = document.querySelectorAll('.file-name');
-    const downloadPopup = document.getElementById('download-popup');
-    const downloadFileNameSpan = document.getElementById('download-file-name');
-    const confirmDownloadButton = document.getElementById('confirm-download');
-    const cancelDownloadButton = document.getElementById('cancel-download');
+    const loginContainer = document.getElementById('login-container');
+    const loginForm = document.getElementById('login-form');
+    const studentIdInput = document.getElementById('studentId');
+    const passwordInput = document.getElementById('password');
+    const errorMessage = document.getElementById('error-message');
+    const mainContent = document.getElementById('main-content');
 
-    let currentFilePath = ''; // ダウンロードするファイルのパスを一時的に保持
+    // !!! 警告 !!!
+    // ここにIDとパスワードをハードコードします。
+    // この情報は、ブラウザの開発者ツールを使えば誰にでも見えてしまいます。
+    // セキュリティが極めて低いため、機密性の高い情報には絶対に使用しないでください。
+    //
+    // 学籍番号は複数設定可能です。共通パスワードは一つです。
+    const VALID_STUDENT_IDS = ['2023001', '2023002', '2023003', '2024001']; // 例: 許可する学籍番号のリスト
+    const SHARED_PASSWORD = 'your_super_secret_password_here'; // ここにあなたの決める共通パスワードを設定
 
-    // ファイル名がクリックされた時の処理
-    fileNames.forEach(fileNameElement => {
-        fileNameElement.addEventListener('click', (event) => { // イベントオブジェクトを受け取る
-            event.preventDefault(); // ★ここが追加された行です。デフォルトのクリック動作をキャンセル
+    // ページがロードされたときにログイン状態をチェック（今回は常にログイン画面を表示）
+    // 将来的に「一度ログインしたらセッション中は表示しない」などの機能を追加する場合、ここにロジックを書きます。
+    // しかし、それもやはりクライアントサイドなのでセキュリティ上の問題は残ります。
 
-            currentFilePath = fileNameElement.dataset.filePath; // data-file-pathからパスを取得
-            const fileName = fileNameElement.textContent; // ファイル名テキストを取得
+    loginForm.addEventListener('submit', (event) => {
+        event.preventDefault(); // フォームのデフォルト送信（ページ遷移）を防止
 
-            downloadFileNameSpan.textContent = fileName; // ポップアップにファイル名を表示
-            downloadPopup.style.display = 'flex'; // ポップアップを表示
-        });
-    });
+        const enteredId = studentIdInput.value;
+        const enteredPassword = passwordInput.value;
 
-    // ダウンロードボタンがクリックされた時の処理
-    confirmDownloadButton.addEventListener('click', () => {
-        if (currentFilePath) {
-            // ダウンロードを実行
-            const link = document.createElement('a');
-            link.href = currentFilePath;
-            link.download = downloadFileNameSpan.textContent; 
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-
-            // ポップアップを閉じる
-            downloadPopup.style.display = 'none';
-            currentFilePath = ''; // パスをリセット
+        // IDとパスワードをチェック
+        if (VALID_STUDENT_IDS.includes(enteredId) && enteredPassword === SHARED_PASSWORD) {
+            // 認証成功
+            loginContainer.style.display = 'none'; // ログイン画面を隠す
+            mainContent.style.display = 'block'; // メインコンテンツを表示
+            errorMessage.style.display = 'none'; // エラーメッセージを隠す
+            
+            // オプション: パスワードを自動的にクリア
+            passwordInput.value = ''; 
+        } else {
+            // 認証失敗
+            errorMessage.style.display = 'block'; // エラーメッセージを表示
+            passwordInput.value = ''; // パスワード入力をクリア
         }
-    });
-
-    // キャンセルボタンがクリックされた時の処理
-    cancelDownloadButton.addEventListener('click', () => {
-        downloadPopup.style.display = 'none'; // ポップアップを閉じる
-        currentFilePath = ''; // パスをリセット
     });
 });
